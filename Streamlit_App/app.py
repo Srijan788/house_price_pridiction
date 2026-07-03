@@ -26,12 +26,16 @@ st.set_page_config(
 # ---------------------------
 # LOAD CSS
 # ---------------------------
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+
 def load_css():
-    with open("style.css") as f:
+    css_file = BASE_DIR / "style.css"
+    with open(css_file, "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 load_css()
-
 
 # ---------------------------
 # SIDEBAR
