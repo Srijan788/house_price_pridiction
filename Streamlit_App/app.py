@@ -5,11 +5,13 @@ import time
 import plotly.express as px
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent.parent
+APP_DIR = Path(__file__).resolve().parent
 
-DATASET_PATH = BASE_DIR / "Dataset" / "boston.csv"
-MODEL_PATH = BASE_DIR / "Model" / "house_price_model.pkl"
-FEATURE_PATH = BASE_DIR / "Model" / "features.pkl"
+DATASET_PATH = ROOT_DIR / "Dataset" / "boston.csv"
+MODEL_PATH = ROOT_DIR / "Model" / "house_price_model.pkl"
+FEATURE_PATH = ROOT_DIR / "Model" / "features.pkl"
+LOGO_PATH = ROOT_DIR / "Images" / "logo.png"
 
 df = pd.read_csv(DATASET_PATH)
 model = joblib.load(MODEL_PATH)
@@ -26,26 +28,17 @@ st.set_page_config(
 # ---------------------------
 # LOAD CSS
 # ---------------------------
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent
 
 def load_css():
-    css_file = BASE_DIR / "style.css"
+    css_file = APP_DIR / "style.css"
     with open(css_file, "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 load_css()
-
 # ---------------------------
 # SIDEBAR
 # ---------------------------
-
-st.sidebar.image(
-    "https://img.icons8.com/fluency/240/home.png",
-    width=120
-)
-
+st.sidebar.image(str(LOGO_PATH), width=150)
 st.sidebar.title("House Price Prediction")
 
 st.sidebar.markdown("---")
