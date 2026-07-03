@@ -3,6 +3,17 @@ import pandas as pd
 import joblib
 import time
 import plotly.express as px
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+DATASET_PATH = BASE_DIR / "Dataset" / "boston.csv"
+MODEL_PATH = BASE_DIR / "Model" / "house_price_model.pkl"
+FEATURE_PATH = BASE_DIR / "Model" / "features.pkl"
+
+df = pd.read_csv(DATASET_PATH)
+model = joblib.load(MODEL_PATH)
+features = joblib.load(FEATURE_PATH)
 # ---------------------------
 # PAGE CONFIG
 # ---------------------------
@@ -12,11 +23,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-# ---------------------------
-# LOAD DATASET
-# ---------------------------
-df = pd.read_csv("../Dataset/boston.csv")
 # ---------------------------
 # LOAD CSS
 # ---------------------------
@@ -25,17 +31,13 @@ def load_css():
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 load_css()
-# ---------------------------
-# LOAD MODEL
-# ---------------------------
-model = joblib.load("../Model/house_price_model.pkl")
-features = joblib.load("../Model/features.pkl")
+
 
 # ---------------------------
 # SIDEBAR
 # ---------------------------
-st.sidebar.image("../Images/logo.png", width=180)
-
+LOGO_PATH = BASE_DIR / "Images" / "logo.png"
+st.sidebar.image(str(LOGO_PATH), width=180)
 st.sidebar.title("House Price Prediction")
 
 st.sidebar.markdown("---")
