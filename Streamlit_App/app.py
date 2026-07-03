@@ -40,8 +40,12 @@ load_css()
 # ---------------------------
 # SIDEBAR
 # ---------------------------
-LOGO_PATH = BASE_DIR / "Images" / "logo.png"
-st.sidebar.image(str(LOGO_PATH), width=180)
+
+st.sidebar.image(
+    "https://img.icons8.com/fluency/240/home.png",
+    width=120
+)
+
 st.sidebar.title("House Price Prediction")
 
 st.sidebar.markdown("---")
